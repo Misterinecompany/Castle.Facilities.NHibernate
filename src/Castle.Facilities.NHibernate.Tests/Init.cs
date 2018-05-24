@@ -64,7 +64,7 @@ namespace Castle.Facilities.NHibernate.Tests
 			}
 			catch (FacilityException ex)
 			{
-				Assert.That(ex.Message, Is.StringContaining("registered"));
+				Assert.That(ex.Message, Does.Contain("registered"));
 			}
 		}
 
@@ -81,7 +81,7 @@ namespace Castle.Facilities.NHibernate.Tests
 			}
 			catch (FacilityException ex)
 			{
-				Assert.That(ex.Message, Is.StringContaining("IsDefault"));
+				Assert.That(ex.Message, Does.Contain("IsDefault"));
 			}
 		}
 
@@ -99,7 +99,7 @@ namespace Castle.Facilities.NHibernate.Tests
 			}
 			catch (FacilityException ex)
 			{
-				Assert.That(ex.Message.ToLowerInvariant(), Is.StringContaining("duplicate"));
+				Assert.That(ex.Message.ToLowerInvariant(), Does.Contain("duplicate"));
 			}
 		}
 
