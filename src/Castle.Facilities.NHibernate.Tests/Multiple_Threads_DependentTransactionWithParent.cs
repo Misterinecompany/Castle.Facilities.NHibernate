@@ -32,8 +32,9 @@ namespace Castle.Facilities.NHibernate.Tests
 
 	using global::NHibernate;
 	using Castle.Facilities.Logging;
+	using Castle.Services.Logging.NLogIntegration;
 
-	public class Multiple_Threads_DependentTransactionWithParent : EnsureSchema
+    public class Multiple_Threads_DependentTransactionWithParent : EnsureSchema
 	{
 		private static Logger logger = LogManager.GetCurrentClassLogger();
 		private WindsorContainer container;
@@ -42,7 +43,7 @@ namespace Castle.Facilities.NHibernate.Tests
 		public void SetUp()
 		{
 			container = new WindsorContainer();
-			container.AddFacility<LoggingFacility>(f => f.UseNLog());
+			container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 			container.Register(Component.For<INHibernateInstaller>().ImplementedBy<ExampleInstaller>());
 			container.AddFacility<AutoTxFacility>();
 			container.AddFacility<NHibernateFacility>();

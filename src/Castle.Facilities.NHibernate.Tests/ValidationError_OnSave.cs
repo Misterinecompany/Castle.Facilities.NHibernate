@@ -124,7 +124,7 @@ namespace Castle.Facilities.NHibernate.Tests
 			return null;
 		}
 
-		public object Instantiate(string entityName, EntityMode entityMode, object id)
+		public object Instantiate(string entityName, object id)
 		{
 			return null;
 		}

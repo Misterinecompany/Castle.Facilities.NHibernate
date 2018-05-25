@@ -26,8 +26,9 @@ namespace Castle.Facilities.NHibernate.Tests
 
 	using NUnit.Framework;
 	using Castle.Facilities.Logging;
+	using Castle.Services.Logging.NLogIntegration;
 
-	public class SimpleUseCase_SingleSave : EnsureSchema
+    public class SimpleUseCase_SingleSave : EnsureSchema
 	{
 		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 		private WindsorContainer c;
@@ -76,7 +77,7 @@ namespace Castle.Facilities.NHibernate.Tests
 
 			c.Register(Component.For<INHibernateInstaller>().ImplementedBy<ExampleInstaller>());
 
-			c.AddFacility<LoggingFacility>(f => f.UseNLog());
+			c.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 			c.AddFacility<AutoTxFacility>();
 			c.AddFacility<NHibernateFacility>();
 

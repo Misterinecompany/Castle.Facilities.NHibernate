@@ -236,7 +236,7 @@ namespace Castle.Facilities.NHibernate
 					Component.For<ISessionManager>().Instance(new SessionManager(() =>
 					{
 						var factory = Kernel.Resolve<ISessionFactory>(x.Instance.SessionFactoryKey);
-						var s = x.Instance.Interceptor.Do(y => factory.OpenSession(y)).OrDefault(factory.OpenSession());
+						var s = x.Instance.Interceptor.Do(y => factory.WithOptions().Interceptor(y).OpenSession()).OrDefault(factory.OpenSession());
 						s.FlushMode = flushMode;
 						return s;
 					}, Kernel.Resolve<ITransactionManager>()))
@@ -278,7 +278,7 @@ namespace Castle.Facilities.NHibernate
 					.UsingFactoryMethod((k, c) =>
 					{
 						var factory = k.Resolve<ISessionFactory>(x.Instance.SessionFactoryKey);
-						var s = x.Instance.Interceptor.Do(y => factory.OpenSession(y)).OrDefault(factory.OpenSession());
+						var s = x.Instance.Interceptor.Do(y => factory.WithOptions().Interceptor(y).OpenSession()).OrDefault(factory.OpenSession());
 						s.FlushMode = flushMode;
 						logger.DebugFormat("resolved session component named '{0}'", c.Handler.ComponentModel.Name);
 						return s;

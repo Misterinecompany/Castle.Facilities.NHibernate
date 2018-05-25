@@ -29,8 +29,9 @@ namespace NHibernate.AttrExampleConsoleApp
 
 	using Topshelf;
 	using Castle.Facilities.Logging;
+	using Castle.Services.Logging.NLogIntegration;
 
-	internal class Program
+    internal class Program
 	{
 		private static void Main(string[] args)
 		{
@@ -58,7 +59,7 @@ namespace NHibernate.AttrExampleConsoleApp
 		private void Start()
 		{
 			container = new WindsorContainer();
-			container.AddFacility<LoggingFacility>(f => f.UseNLog());
+			container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 
 			container
 				.AddFacility<AutoTxFacility>()

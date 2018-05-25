@@ -16,8 +16,6 @@ using System;
 using System.IO;
 using System.Linq;
 
-using Castle.Facilities.NHibernate.Tests.TestClasses;
-
 namespace Castle.Facilities.NHibernate.Tests
 {
 	using AutoTx;
@@ -30,7 +28,10 @@ namespace Castle.Facilities.NHibernate.Tests
 	using NUnit.Framework;
 	using Logging;
 
-	public class SimpleUseCase_PersistedConfig : EnsureSchema
+	using Castle.Facilities.NHibernate.Tests.TestClasses;
+	using Castle.Services.Logging.NLogIntegration;
+
+    public class SimpleUseCase_PersistedConfig : EnsureSchema
 	{
 		[SetUp]
 		public void SetUp()
@@ -47,7 +48,7 @@ namespace Castle.Facilities.NHibernate.Tests
 			{
 				c.Register( Component.For<INHibernateInstaller>().ImplementedBy<PersistingInstaller>() );
 
-				c.AddFacility<LoggingFacility>( f => f.UseNLog() );
+				c.AddFacility<LoggingFacility>( f => f.LogUsing<NLogFactory>() );
 				c.AddFacility<AutoTxFacility>();
 				c.AddFacility<NHibernateFacility>();
 

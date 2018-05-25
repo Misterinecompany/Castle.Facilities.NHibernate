@@ -30,14 +30,15 @@ namespace Castle.Facilities.NHibernate.Tests
 
 	using global::NHibernate;
 	using Castle.Facilities.Logging;
+	using Castle.Services.Logging.NLogIntegration;
 
-	internal class Init
+    internal class Init
 	{
 		[Test]
 		public void given_two_configs_resolves_the_default_true_one_first()
 		{
 			var c = new WindsorContainer();
-			c.AddFacility<LoggingFacility>(f => f.UseNLog());
+			c.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 			c.Register(Component.For<INHibernateInstaller>().ImplementedBy<C1>());
 			c.Register(Component.For<INHibernateInstaller>().ImplementedBy<C2>());
 			AssertOrder(c);
@@ -47,7 +48,7 @@ namespace Castle.Facilities.NHibernate.Tests
 		public void given_two_configs_resolves_the_default_true_one_first_permutate()
 		{
 			var c = new WindsorContainer();
-			c.AddFacility<LoggingFacility>(f => f.UseNLog());
+			c.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 			c.Register(Component.For<INHibernateInstaller>().ImplementedBy<C2>());
 			c.Register(Component.For<INHibernateInstaller>().ImplementedBy<C1>());
 			AssertOrder(c);
@@ -106,7 +107,7 @@ namespace Castle.Facilities.NHibernate.Tests
 		private static WindsorContainer GetTxContainer()
 		{
 			var c = new WindsorContainer();
-			c.AddFacility<LoggingFacility>(f => f.UseNLog());
+			c.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 			c.AddFacility<FactorySupportFacility>();
 			c.AddFacility<AutoTxFacility>();
 			return c;

@@ -28,8 +28,9 @@ namespace Castle.Facilities.NHibernate.Tests
 
 	using global::NHibernate;
 	using Castle.Facilities.Logging;
+	using Castle.Services.Logging.NLogIntegration;
 
-	public class AdvancedUseCase_DependentTransactionsAreNotFlushingToStore
+    public class AdvancedUseCase_DependentTransactionsAreNotFlushingToStore
 	{
 		private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -60,7 +61,7 @@ namespace Castle.Facilities.NHibernate.Tests
 
 			c.Register(Component.For<INHibernateInstaller>().ImplementedBy<ExampleInstaller>());
 
-			c.AddFacility<LoggingFacility>(f => f.UseNLog());
+			c.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>());
 			c.AddFacility<AutoTxFacility>();
 			c.AddFacility<NHibernateFacility>();
 
