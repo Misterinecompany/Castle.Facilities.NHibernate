@@ -30,13 +30,18 @@ build :quick_compile do |b|
   b.sln     = 'Castle.Facilities.NHibernate.sln'
 end
 
-task :paket_bootstrap do
-  system 'tools/paket.bootstrapper.exe', clr_command: true unless   File.exists? 'tools/paket.exe'
-end
+#task :paket_bootstrap do
+#  system 'tools/paket.bootstrapper.exe', clr_command: true unless   File.exists? 'tools/paket.exe'
+#end
 
-desc 'restore all nugets as per the packages.config files'
-task :restore => :paket_bootstrap do
-  system 'tools/paket.exe', 'restore', clr_command: true
+#desc 'restore all nugets as per the packages.config files'
+#task :restore => :paket_bootstrap do
+#  system 'tools/paket.exe', 'restore', clr_command: true
+#end
+
+desc 'restore all nugets'
+task :restore do  
+  sh "tools/NuGet.exe restore"
 end
 
 desc 'Perform full build'
@@ -53,7 +58,7 @@ nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
   p.files   = FileList['src/*/*.csproj'].
     exclude(/Tests/)
   p.out     = 'build/pkg'
-  p.exe     = 'packages/NuGet.CommandLine.3.3.0/tools/NuGet.exe'
+  p.exe     = 'tools/NuGet.exe'
   p.with_metadata do |m|
     m.title       = 'Castle.Facilities.NHibernate'
     m.description = Description
@@ -81,5 +86,5 @@ end
 Albacore::Tasks::Release.new :release,
                              pkg_dir: 'build/pkg',
                              depend_on: [:create_nugets, :ensure_nuget_key],
-                             nuget_exe: 'packages/NuGet.CommandLine/tools/NuGet.exe',
+                             nuget_exe: 'tools/NuGet.exe',
                              api_key: ENV['NUGET_KEY']

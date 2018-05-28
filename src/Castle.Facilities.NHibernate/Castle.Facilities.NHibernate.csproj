@@ -62,7 +62,14 @@
     <None Include="..\..\buildscripts\CastleKey.snk">
       <Link>CastleKey.snk</Link>
     </None>
-    <None Include="paket.references" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.2.1" />
+    <PackageReference Include="Castle.Facilities.AutoTx" Version="3.2.207.2207" />
+    <PackageReference Include="Castle.FactorySupportFacility" Version="4.1.0" />
+    <PackageReference Include="Castle.LoggingFacility" Version="4.1.0" />
+    <PackageReference Include="Castle.Transactions" Version="3.2.207.2207" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.0" />
+    <PackageReference Include="NHibernate" Version="5.1.2" />
+  </ItemGroup>
 </Project>
