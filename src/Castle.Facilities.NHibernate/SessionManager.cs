@@ -16,7 +16,6 @@ namespace Castle.Facilities.NHibernate
 {
 	using System;
 	using System.Diagnostics.Contracts;
-	using System.Runtime.Remoting.Messaging;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Facilities;
 	using Castle.Transactions;

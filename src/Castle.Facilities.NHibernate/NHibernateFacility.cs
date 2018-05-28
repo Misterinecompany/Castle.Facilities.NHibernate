@@ -298,13 +298,13 @@ namespace Castle.Facilities.NHibernate
 					if (index == 0)
 						return registration.Named(baseName + SessionPerTxSuffix).LifeStyle.PerTopTransaction();
 					if (index == 1)
-						return registration.Named(baseName + SessionPWRSuffix).LifeStyle.PerWebRequest;
+						return registration.Named(baseName + SessionPWRSuffix).LifeStyle.Scoped();
 					if (index == 2)
 						return registration.Named(baseName + SessionTransientSuffix).LifeStyle.Transient;
 					break;
 				case DefaultSessionLifeStyleOption.SessionPerWebRequest:
 					if (index == 0)
-						return registration.Named(baseName + SessionPWRSuffix).LifeStyle.PerWebRequest;
+						return registration.Named(baseName + SessionPWRSuffix).LifeStyle.Scoped();
 					if (index == 1)
 						return registration.Named(baseName + SessionPerTxSuffix).LifeStyle.PerTopTransaction();
 					if (index == 2)
@@ -316,7 +316,7 @@ namespace Castle.Facilities.NHibernate
 					if (index == 1)
 						return registration.Named(baseName + SessionPerTxSuffix).LifeStyle.PerTopTransaction();
 					if (index == 2)
-						return registration.Named(baseName + SessionPWRSuffix).LifeStyle.PerWebRequest;
+						return registration.Named(baseName + SessionPWRSuffix).LifeStyle.Scoped();
 					break;
 				default:
 					throw new FacilityException("Unknown default life style - please file a bug report");

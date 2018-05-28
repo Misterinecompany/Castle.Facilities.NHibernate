@@ -64,7 +64,7 @@ namespace Castle.Facilities.NHibernate.Tests.LifeStyle
 			}
 			catch (InvalidOperationException e)
 			{
-				Assert.That(e.Message, Does.Contain("HttpContext.Current"));
+				Assert.That(e.Message, Does.Contain("Scope was not available"));
 			}
 		}
 
