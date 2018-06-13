@@ -112,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Castle.Facilities.NHibernate\Castle.Facilities.NHibernate.csproj">
-      <Project>{12598D2B-B68E-4EA7-A7DD-0CC2398CE8B6}</Project>
+      <Project>{12598d2b-b68e-4ea7-a7dd-0cc2398ce8b6}</Project>
       <Name>Castle.Facilities.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
